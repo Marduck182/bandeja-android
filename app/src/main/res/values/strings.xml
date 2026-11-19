@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Bandeja</string>
+    <string name="share_target_label">Guardar en Bandeja</string>
+
+    <!-- Generic actions -->
+    <string name="action_back">Atrás</string>
+    <string name="action_close">Cerrar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_open">Abrir</string>
+    <string name="action_more">Más opciones</string>
+    <string name="action_copy_link">Copiar enlace</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_open_original">Abrir original</string>
+    <string name="action_see_all">Ver todo</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="content_deleted">Enlace eliminado</string>
+    <string name="category_none">Sin categoría</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_search">Buscar</string>
+    <string name="nav_favorites">Favoritos</string>
+    <string name="nav_settings">Ajustes</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Omitir</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_start">Empezar</string>
+    <string name="onboarding_1_title">Guarda lo que encuentres</string>
+    <string name="onboarding_1_body">Guarda cualquier contenido que encuentres y organízalo a tu manera.</string>
+    <string name="onboarding_2_title">Compartir → Bandeja</string>
+    <string name="onboarding_2_body">En YouTube, Instagram, tu navegador o cualquier app: toca Compartir y elige Bandeja. Son dos toques.</string>
+    <string name="onboarding_3_title">Tus categorías, tus reglas</string>
+    <string name="onboarding_3_body">Crea categorías con tu propio nombre, icono y color. Después encuéntralo todo con la búsqueda.</string>
+
+    <!-- Home -->
+    <string name="home_categories">Mis categorías</string>
+    <string name="home_recent">Recientes</string>
+    <string name="home_favorites">Favoritos</string>
+    <string name="home_new_category">Nueva</string>
+    <string name="home_category_options">Opciones de la categoría</string>
+    <string name="category_delete_button">Eliminar categoría</string>
+    <string name="home_save_link">Guardar enlace</string>
+    <string name="home_empty_title">Tu bandeja está vacía</string>
+    <string name="home_empty_body">Comparte un enlace desde cualquier app y elige Bandeja, o pega uno aquí.</string>
+    <plurals name="items_count">
+        <item quantity="one">%d elemento</item>
+        <item quantity="many">%d elementos</item>
+        <item quantity="other">%d elementos</item>
+    </plurals>
+
+    <!-- Category -->
+    <string name="category_empty_title">Aquí aún no hay nada</string>
+    <string name="category_empty_body">Guarda contenido y elige «%1$s» como categoría.</string>
+    <string name="category_delete_title">¿Eliminar «%1$s»?</string>
+    <string name="category_delete_empty">La categoría está vacía.</string>
+    <plurals name="category_delete_with_items">
+        <item quantity="one">Su elemento no se borra: pasará a «Sin categoría».</item>
+        <item quantity="many">Sus %d elementos no se borran: pasarán a «Sin categoría».</item>
+        <item quantity="other">Sus %d elementos no se borran: pasarán a «Sin categoría».</item>
+    </plurals>
+
+    <!-- Category editor -->
+    <string name="editor_create_title">Nueva categoría</string>
+    <string name="editor_edit_title">Editar categoría</string>
+    <string name="editor_name_label">Nombre</string>
+    <string name="editor_icon_label">Icono</string>
+    <string name="editor_color_label">Color</string>
+    <string name="editor_preview_placeholder">Nombre de la categoría</string>
+    <string name="error_name_blank">Escribe un nombre</string>
+    <string name="error_name_taken">Ya tienes una categoría con ese nombre</string>
+    <string name="error_name_long" tools:ignore="PluralsCandidate">Máximo %1$d caracteres</string>
+
+    <!-- Detail -->
+    <string name="detail_not_found_title">Este contenido ya no existe</string>
+    <string name="detail_not_found_body">Es posible que lo hayas eliminado.</string>
+    <string name="detail_notes">Notas</string>
+    <string name="detail_no_notes">Sin notas</string>
+    <string name="detail_tags">Etiquetas</string>
+    <string name="detail_saved_on">Guardado el %1$s</string>
+    <string name="detail_published_on">Publicado el %1$s</string>
+    <string name="detail_link_copied">Enlace copiado</string>
+    <string name="detail_open_failed">No hay ninguna app para abrir este enlace</string>
+    <string name="detail_delete_title">¿Eliminar este contenido?</string>
+    <string name="detail_delete_body">Se quitará de Bandeja. El original no se ve afectado.</string>
+    <string name="detail_move">Cambiar categoría</string>
+    <string name="favorite_add">Añadir a favoritos</string>
+    <string name="favorite_remove">Quitar de favoritos</string>
+    <string name="edit_title">Editar contenido</string>
+
+    <!-- Content types -->
+    <string name="type_link">Enlace</string>
+    <string name="type_video">Video</string>
+    <string name="type_article">Artículo</string>
+    <string name="type_social">Publicación</string>
+    <string name="type_image">Imagen</string>
+    <string name="type_code">Código</string>
+
+    <!-- Save sheet -->
+    <string name="save_title">Guardar en Bandeja</string>
+    <string name="save_url_label">Enlace</string>
+    <string name="save_url_hint">Pega un enlace</string>
+    <string name="save_title_label">Título</string>
+    <string name="save_category">Categoría</string>
+    <string name="save_new_category">Nueva</string>
+    <string name="save_more">Notas y etiquetas</string>
+    <string name="save_notes_label">Notas</string>
+    <string name="save_tags_label">Etiquetas</string>
+    <string name="save_tags_hint">Escribe y pulsa Enter</string>
+    <string name="save_favorite">Favorito</string>
+    <string name="save_button">Guardar</string>
+    <string name="save_saved">Guardado</string>
+    <string name="save_saved_in">Guardado en %1$s</string>
+    <string name="save_preview_loading">Buscando vista previa…</string>
+    <string name="save_duplicate_title">Ya está guardado</string>
+    <string name="save_duplicate_in">Este contenido ya está guardado en %1$s.</string>
+    <string name="save_duplicate_uncategorized">Este contenido ya está guardado, sin categoría.</string>
+    <string name="save_duplicate_again">Guardar otra vez</string>
+    <string name="save_error_title">No se pudo guardar</string>
+    <string name="save_error_empty">No recibimos nada para guardar.</string>
+    <string name="save_error_no_url">Lo que compartiste no contiene un enlace.</string>
+    <string name="save_error_unsupported">Este tipo de enlace no se puede guardar. Solo se admiten enlaces web (http o https).</string>
+    <string name="save_error_malformed">El enlace no es válido.</string>
+    <string name="save_error_too_long">El enlace es demasiado largo.</string>
+    <string name="quick_category_title">Nueva categoría</string>
+    <string name="quick_category_create">Crear</string>
+
+    <!-- Tags -->
+    <string name="tag_remove">Quitar etiqueta %1$s</string>
+    <string name="tag_add">Añadir etiqueta</string>
+
+    <!-- Search -->
+    <string name="search_hint">Buscar en tu bandeja</string>
+    <string name="search_clear">Borrar búsqueda</string>
+    <string name="search_initial_title">Encuentra lo que guardaste</string>
+    <string name="search_initial_body">Busca por título, enlace, sitio, notas, categoría o etiqueta.</string>
+    <string name="search_empty_title">Sin resultados</string>
+    <string name="search_empty_body">Prueba con otras palabras o quita algún filtro.</string>
+    <string name="filter_category">Categoría</string>
+    <string name="filter_favorites">Favoritos</string>
+    <string name="filter_date">Fecha</string>
+    <string name="filter_source">Fuente</string>
+    <string name="filter_clear">Quitar filtros</string>
+    <string name="filter_all_categories">Todas</string>
+    <string name="filter_all_sources">Todas</string>
+    <string name="period_any">Cualquier fecha</string>
+    <string name="period_7">Últimos 7 días</string>
+    <string name="period_30">Últimos 30 días</string>
+    <string name="period_year">Último año</string>
+    <plurals name="search_results">
+        <item quantity="one">%d resultado</item>
+        <item quantity="many">%d resultados</item>
+        <item quantity="other">%d resultados</item>
+    </plurals>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Favoritos</string>
+    <string name="favorites_empty_title">Aún no tienes favoritos</string>
+    <string name="favorites_empty_body">Toca el corazón de cualquier contenido para tenerlo aquí.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_appearance">Apariencia</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="settings_dynamic">Colores dinámicos</string>
+    <string name="settings_dynamic_desc">Usa los colores de tu fondo de pantalla (Android 12 o superior).</string>
+    <string name="settings_help">Ayuda</string>
+    <string name="settings_intro">Ver la introducción</string>
+    <string name="settings_intro_desc">Cómo guardar contenido con Compartir.</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_version">Versión %1$s</string>
+    <string name="settings_about_desc">Tus datos se guardan solo en este dispositivo.</string>
+</resources>

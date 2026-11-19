@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Inbox tray -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,56 H44 A10,10 0 0 0 64,56 H78 V70 A4,4 0 0 1 74,74 H34 A4,4 0 0 1 30,70 Z" />
+    <!-- Arrow dropping into it -->
+    <path
+        android:strokeColor="#FFB964"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M54,30 V50 M45,42 L54,51 L63,42" />
+</vector>
