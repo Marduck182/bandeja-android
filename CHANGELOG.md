@@ -115,3 +115,24 @@ miniaturas (Coil), `SubcomposeAsyncImage` en listas, rebinding DNS en la vista p
   se conservan.
 - **Archivos**: `app/build.gradle.kts`.
 - **Pruebas**: 176, 0 fallos.
+
+## 2026-11-19 — Versión 0.2.1 · videos cortos de cada plataforma (petición del usuario: "ver cómo responden los short")
+- **Qué se probó** (enlaces públicos vigentes, mismas peticiones que hace la app):
+
+  | Plataforma | oEmbed | Página | Resultado en la app |
+  |---|---|---|---|
+  | YouTube Shorts | título + miniatura | etiquetas Open Graph completas | **miniatura real** |
+  | TikTok | solo `type: video` (probado con 3 identificadores de navegador y 2 idiomas) | 200, sin etiquetas ni datos del video | tarjeta negra con la marca |
+  | Facebook Reels | solo HTML, sin imagen | 400 | tarjeta azul con la marca |
+  | Instagram Reels | requiere token de Meta | página de inicio de sesión sin etiquetas | tarjeta rosa con la marca |
+
+- **Corrección de lo dicho en 0.2.0**: se afirmó que TikTok "debería" tener miniatura vía oEmbed. Probado con un video
+  vigente, **no la tiene**. El código de oEmbed se deja (inofensivo: si no hay imagen, se sigue con la página) pero TikTok
+  cuenta como "sin miniatura" (D-026).
+- **Defectos reales encontrados al revisar los enlaces compartidos y corregidos**:
+  1. Reels de Facebook: `mibextid`, `s` y `fs` impedían detectar el mismo Reel como duplicado (D-027).
+  2. Enlaces cortos `vm.tiktok.com`/`vt.tiktok.com`: se mostraban con ese dominio y no se reconocían como video.
+  3. Mientras corregía lo anterior introduje y corregí un fallo propio: `fb.watch` mostrado como `facebook.com` dejaba de
+     reconocerse como video (el detector usaba el nombre de pantalla en vez del dominio real).
+- **Archivos**: `domain/url/{UrlNormalizer,ContentTypeDetector}.kt`, `app/build.gradle.kts` (versión 0.2.1, código 3).
+- **Pruebas**: 185, 0 fallos (suite ejecutada dos veces seguidas para descartar intermitencias).

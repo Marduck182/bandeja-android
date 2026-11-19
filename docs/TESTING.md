@@ -36,6 +36,7 @@ Además:
 
 - **Eliminar** (`CategoryDeletionUiTest`, `SwipeDeleteUiTest`, `ContentRepositoryTest`): categoría desde Inicio (mantener pulsado), editor (papelera y botón), menú ⋮; cancelar no borra; el contenido de una categoría borrada sobrevive; deslizar solo revela la papelera, presionarla borra, *Deshacer* devuelve el enlace con notas, etiquetas, favorito y categoría.
 - **Miniaturas** (`OEmbedTest`): endpoint oficial por sitio (con la URL codificada, enlaces cortos de TikTok, sin falsos positivos como `nottiktok.com`), lectura de `title`/`thumbnail_url`/`type`, descarte de miniaturas inseguras, respuesta de TikTok sin datos, oEmbed anunciado por la página, y la tarjeta de color por sitio.
+- **Videos cortos** (`ShortVideoLinksTest`): lo que comparte cada plataforma para un video corto: YouTube Shorts con `si`, TikTok con comentario y enlace corto `vm.tiktok.com`, Instagram `reel`/`reels` con `igsh`, Facebook Reel con `mibextid`/`s`/`fs`, `fb.watch` y enlaces *share*; el mismo video desde web, app y móvil es un solo elemento.
 - **Arquitectura**: `ArchitectureTest` falla si `domain` importa Android/`data`/`ui`, si `data` importa `ui`, o si `ui` toca Room/red.
 
 ## Lo que estas pruebas NO demuestran
@@ -44,7 +45,7 @@ Hay que hacerlo una vez en un teléfono real (no había dispositivo conectado al
 - [ ] Que **Bandeja aparece** en el menú Compartir de YouTube, Chrome, Instagram, Facebook, TikTok, X y Reddit, y que cada
       una entrega lo que el parser espera (el parser cubre los formatos conocidos; las apps pueden cambiar).
 - [ ] La hoja sobre la app de origen: animación, teclado (`adjustResize` + `imePadding`), y que al guardar **vuelve** a la app de origen.
-- [ ] **Miniaturas de TikTok y Vimeo con enlaces reales** (el oEmbed se probó contra los servidores, pero con un video de TikTok de ejemplo respondió sin título ni imagen; hace falta un enlace real y vigente).
+- [ ] Miniaturas de Vimeo, Dailymotion, Spotify y SoundCloud con enlaces reales (no se encontraron enlaces de prueba vigentes). **TikTok, Instagram y Facebook ya se probaron: no entregan miniatura** (ver D-026).
 - [ ] Vista previa real: títulos/miniaturas de YouTube (oEmbed), Chrome y sitios de noticias; comportamiento con
       Instagram/Facebook/TikTok (suelen no dar metadatos: el título cae al dominio).
 - [ ] "Abrir" desde el aviso de duplicado (lanza `MainActivity` en su propia tarea).

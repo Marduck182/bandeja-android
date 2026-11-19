@@ -119,7 +119,7 @@ class SaveViewModelTest {
         settings.setLastCategoryId(code)
         val vm = viewModel()
         vm.startFromShare(share("https://github.com/JetBrains/kotlin"))
-        val ready = vm.state.await { it.isUrlValid && it.categories.isNotEmpty() }
+        val ready = vm.state.await { it.canSave && it.categories.isNotEmpty() }
         assertEquals(code, ready.categoryId)
 
         vm.save()

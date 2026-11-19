@@ -6,11 +6,13 @@ import com.bandeja.app.domain.model.ContentType
 object ContentTypeDetector {
 
     fun detect(url: ParsedUrl, ogType: String? = null): ContentType {
-        val host = UrlNormalizer.sourceOf(url)
+        // The real host, not the name shown on screen: fb.watch is displayed as facebook.com but is always a video.
+        val host = UrlNormalizer.canonicalHost(url.host)
         val path = url.path.lowercase()
 
         if (IMAGE_EXTENSIONS.any { path.endsWith(it) }) return ContentType.IMAGE
-        if (host in VIDEO_HOSTS) return ContentType.VIDEO
+        // Subdomains count too: vm.tiktok.com and vt.tiktok.com are TikTok's short links.
+        if (VIDEO_HOSTS.any { host == it || host.endsWith(".$it") }) return ContentType.VIDEO
         if (host == "instagram.com" && (path.startsWith("/reel") )) return ContentType.VIDEO
         if (host == "facebook.com" && VIDEO_FACEBOOK_PATHS.any { path.contains(it) }) return ContentType.VIDEO
         if (host in SOCIAL_HOSTS) return ContentType.SOCIAL

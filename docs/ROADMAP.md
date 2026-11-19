@@ -22,8 +22,8 @@ Orden sugerido. Cada punto indica **dónde engancha** en la arquitectura actual,
 | Miniaturas en caché explícita y reintento de vista previa fallida | `fillMissingMetadata` ya es idempotente |
 | Ordenar por: reciente, título, fuente | `SearchFilters.sort` |
 
-### Miniaturas de Facebook e Instagram
-Hoy no hay forma legítima y sin clave: Meta exige un token de aplicación para oEmbed, y un token dentro del APK se
+### Miniaturas de Facebook, Instagram y TikTok
+Hoy no hay forma legítima y sin clave (TikTok incluido: su oEmbed responde sin título ni imagen, probado): Meta exige un token de aplicación para oEmbed, y un token dentro del APK se
 extraería en minutos (el brief prohíbe claves en el código). Camino correcto: un **backend pequeño propio** que guarde
 el token, reciba la URL y devuelva `{título, miniatura}` (con caché); la app lo llama como un `MetadataFetcher` más
 (la interfaz ya existe). Mientras tanto, esos enlaces muestran su tarjeta de color con la marca del sitio.

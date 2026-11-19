@@ -19,7 +19,10 @@ object UrlNormalizer {
 
         youTubeCanonical(host, path, url.query)?.let { return it }
 
-        val keptQuery = if (host in HOSTS_WITHOUT_QUERY) emptyList() else cleanQuery(host, url.query)
+        // Facebook identifies a reel or a share by its path; the query (mibextid, s, fs…) is only share noise.
+        // Other Facebook links (watch/?v=ID, permalink.php?story_fbid=…) keep their query because it holds the id.
+        val facebookByPath = host == "facebook.com" && (path.startsWith("/reel/") || path.startsWith("/share/"))
+        val keptQuery = if (host in HOSTS_WITHOUT_QUERY || facebookByPath) emptyList() else cleanQuery(host, url.query)
         val normalizedPath = path.trimEnd('/').let { if (it.isEmpty()) "" else collapseSlashes(it) }
         val port = url.port?.takeUnless { it == 80 || it == 443 }
 
@@ -69,7 +72,7 @@ object UrlNormalizer {
     private fun collapseSlashes(path: String): String = path.replace(Regex("/{2,}"), "/")
 
     private val TRACKING_KEYS = setOf(
-        "fbclid", "gclid", "dclid", "msclkid", "igshid", "igsh", "mc_cid", "mc_eid", "yclid", "twclid", "_ga", "ref_src",
+        "fbclid", "gclid", "dclid", "msclkid", "igshid", "igsh", "mc_cid", "mc_eid", "yclid", "twclid", "_ga", "ref_src", "mibextid",
     )
 
     private val HOST_SPECIFIC_TRACKING = mapOf(
@@ -81,7 +84,13 @@ object UrlNormalizer {
     private val HOSTS_WITHOUT_QUERY = setOf("x.com", "instagram.com", "tiktok.com", "reddit.com", "threads.net")
 
     // Short-link domains shown as the site they belong to (the normalized URL itself keeps the real host).
-    private val DISPLAY_ALIASES = mapOf("youtu.be" to "youtube.com")
+    private val DISPLAY_ALIASES = mapOf(
+        "youtu.be" to "youtube.com",
+        "vm.tiktok.com" to "tiktok.com",
+        "vt.tiktok.com" to "tiktok.com",
+        "fb.watch" to "facebook.com",
+        "fb.com" to "facebook.com",
+    )
 
     private val HOST_ALIASES = mapOf("twitter.com" to "x.com", "old.reddit.com" to "reddit.com", "new.reddit.com" to "reddit.com")
 }
