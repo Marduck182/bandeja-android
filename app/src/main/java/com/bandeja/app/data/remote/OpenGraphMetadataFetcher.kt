@@ -43,8 +43,34 @@ class OpenGraphMetadataFetcher : MetadataFetcher {
     private fun load(url: String, deadline: Long, active: AtomicReference<HttpURLConnection?>): LinkMetadata? {
         if (!UrlValidator.isValid(url)) return null
         if (YouTubeLinks.videoId(url) != null) youTubeOEmbed(url, deadline, active)?.let { return it }
-        val html = download(url, deadline, active) ?: return null
-        return OpenGraphParser.parse(html.body, html.finalUrl)
+
+        // 1. Sites with a public oEmbed (TikTok, Vimeo…): their answer is the reliable one.
+        var result = providerOEmbed(url, deadline, active)
+        if (result?.thumbnailUrl != null) return result
+
+        // 2. The page itself (Open Graph / Twitter tags).
+        val page = download(url, deadline, active)
+        result = OEmbed.merge(result, page?.let { OpenGraphParser.parse(it.body, it.finalUrl) })
+
+        // 3. Still no image: use the oEmbed endpoint the page announces about itself.
+        if (result?.thumbnailUrl == null && page != null) {
+            val announced = OpenGraphParser.oEmbedLink(page.body, page.finalUrl)
+                ?.let { download(it, deadline, active, expectHtml = false) }
+                ?.let { OEmbed.parse(it.body) }
+            result = OEmbed.merge(result, announced)
+        }
+        return result
+    }
+
+    /** A short link (vm.tiktok.com/…) is resolved to its final address first if the provider rejects it as is. */
+    private fun providerOEmbed(url: String, deadline: Long, active: AtomicReference<HttpURLConnection?>): LinkMetadata? {
+        fun ask(target: String): LinkMetadata? =
+            OEmbed.endpointFor(target)?.let { download(it, deadline, active, expectHtml = false) }?.let { OEmbed.parse(it.body) }
+
+        OEmbed.endpointFor(url) ?: return null
+        ask(url)?.let { return it }
+        val finalUrl = download(url, deadline, active)?.finalUrl
+        return if (finalUrl != null && finalUrl != url) ask(finalUrl) else null
     }
 
     /** YouTube's pages need consent/JS; its oEmbed endpoint is the stable, key-less way to get the title. */

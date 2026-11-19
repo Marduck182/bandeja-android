@@ -35,8 +35,19 @@ object OpenGraphParser {
         return LinkMetadata(title = title?.takeIf { it.isNotEmpty() }, thumbnailUrl = image, contentType = type, publishedAt = published)
     }
 
+    /**
+     * The oEmbed endpoint a page announces with `<link rel="alternate" type="application/json+oembed">`,
+     * or `null`. Many sites that hide their image from scrapers still describe it there.
+     */
+    fun oEmbedLink(html: String, pageUrl: String): String? {
+        val href = Jsoup.parse(html, pageUrl)
+            .select("link[rel=alternate][type=application/json+oembed]")
+            .firstOrNull()?.absUrl("href")?.takeIf { it.isNotEmpty() } ?: return null
+        return href.takeIf { UrlValidator.isValid(it) }
+    }
+
     /** Only web images; relative or `data:` values are discarded. Plain http is upgraded because cleartext is off. */
-    private fun safeImageUrl(url: String): String? = when {
+    internal fun safeImageUrl(url: String): String? = when {
         url.startsWith("https://", ignoreCase = true) -> url
         url.startsWith("http://", ignoreCase = true) -> "https://" + url.substring(7)
         url.startsWith("//") -> "https:$url"

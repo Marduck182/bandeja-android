@@ -91,3 +91,27 @@ miniaturas (Coil), `SubcomposeAsyncImage` en listas, rebinding DNS en la vista p
   larga (se añadió la papelera arriba); estado transitorio en el que Guardar se habilitaba un instante antes de empezar
   la vista previa/comprobación de duplicados de un enlace nuevo (ahora es una sola actualización atómica).
 - **Pruebas**: 164 pruebas, 0 fallos.
+
+## 2026-11-19 — Miniaturas de más sitios (petición del usuario)
+- **Cambio**: la vista previa ahora usa, en orden, (1) el oEmbed oficial del sitio (YouTube, TikTok, Vimeo,
+  Dailymotion, Spotify, SoundCloud), (2) las etiquetas Open Graph de la página, (3) el oEmbed que la propia página
+  anuncia. Los enlaces enviados como corto (`vm.tiktok.com`) se resuelven a su dirección final. Si el sitio no da imagen
+  (Facebook, Instagram) la tarjeta se pinta con el color y la marca del sitio en vez de un gris genérico.
+- **Motivo**: TikTok no entrega etiquetas Open Graph a una petición normal (su página la pinta JavaScript), y Facebook
+  e Instagram bloquean la lectura sin sesión.
+- **Límite, dicho con claridad**: **Facebook e Instagram no tendrán miniatura real** con este enfoque. Probado: Facebook
+  devuelve 400 a un navegador normal y su oEmbed no incluye imagen; el de Instagram exige token de Meta. No se imita el
+  rastreador de Facebook (suplantar su identidad) ni se usa un servicio de terceros (enviaría los enlaces del usuario
+  fuera). Solución real en ROADMAP: backend propio con el token.
+- **Archivos**: `data/remote/{OEmbed,OpenGraphParser,OpenGraphMetadataFetcher}.kt`, `ui/components/{PlatformBrand,ContentComponents}.kt`,
+  `ui/detail/DetailScreen.kt`, `ui/save/SaveContentSheet.kt`, `app/build.gradle.kts` (`org.json` solo para pruebas).
+- **Pruebas**: 176, 0 fallos. **Sin verificar con enlace real de TikTok**: el de ejemplo no devolvió datos.
+
+## 2026-11-19 — Versión 0.2.0 (código 2)
+- **Cambio**: versión subida de 0.1.0 (código 1) a 0.2.0 (código 2) con las miniaturas de más sitios y el borrado de
+  categorías/enlaces.
+- **Motivo**: que Android la ofrezca como **actualización** de la ya instalada: mismo paquete (`com.bandeja.app`), misma
+  firma (certificado de depuración, SHA-256 `91906a2b…d6df`, comprobado) y código de versión mayor. Los datos guardados
+  se conservan.
+- **Archivos**: `app/build.gradle.kts`.
+- **Pruebas**: 176, 0 fallos.

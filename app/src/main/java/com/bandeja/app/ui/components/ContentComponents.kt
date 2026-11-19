@@ -29,6 +29,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,19 +49,28 @@ fun ThumbnailImage(
     type: ContentType,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
+    /** Domain of the link: lets the placeholder wear the site's colors when there is no thumbnail. */
+    source: String? = null,
 ) {
     Box(
         modifier = modifier.background(MaterialTheme.colorScheme.surfaceContainerHighest),
         contentAlignment = Alignment.Center,
     ) {
+        val brand = platformBrand(source)
         val placeholder: @Composable () -> Unit = {
-            Box(Modifier.matchParentSize(), contentAlignment = Alignment.Center) {
-                Icon(
-                    type.icon(),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                    modifier = Modifier.size(28.dp),
-                )
+            if (brand != null) {
+                Box(Modifier.matchParentSize().background(brand.color), contentAlignment = Alignment.Center) {
+                    Text(brand.mark, color = Color.White, fontSize = 30.sp, fontWeight = FontWeight.Bold)
+                }
+            } else {
+                Box(Modifier.matchParentSize(), contentAlignment = Alignment.Center) {
+                    Icon(
+                        type.icon(),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        modifier = Modifier.size(28.dp),
+                    )
+                }
             }
         }
         if (url == null) {
@@ -123,6 +135,7 @@ fun ContentCard(
             ThumbnailImage(
                 url = content.thumbnailUrl,
                 type = content.contentType,
+                source = content.source,
                 modifier = Modifier
                     .width(104.dp)
                     .aspectRatio(4f / 3f)
@@ -163,6 +176,7 @@ fun ContentTile(item: ContentItem, onClick: () -> Unit, modifier: Modifier = Mod
             ThumbnailImage(
                 url = content.thumbnailUrl,
                 type = content.contentType,
+                source = content.source,
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(16f / 9f),

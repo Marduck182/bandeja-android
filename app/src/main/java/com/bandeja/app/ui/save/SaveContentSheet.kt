@@ -267,6 +267,7 @@ private fun PreviewCard(state: SaveUiState) {
                 ThumbnailImage(
                     url = thumbnail,
                     type = state.contentType,
+                    source = state.source,
                     modifier = Modifier
                         .width(96.dp)
                         .aspectRatio(4f / 3f)

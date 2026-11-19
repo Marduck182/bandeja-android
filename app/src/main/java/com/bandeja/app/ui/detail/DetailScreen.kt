@@ -199,6 +199,7 @@ private fun DetailBody(item: ContentItem, modifier: Modifier = Modifier) {
         ThumbnailImage(
             url = content.thumbnailUrl,
             type = content.contentType,
+            source = content.source,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f)

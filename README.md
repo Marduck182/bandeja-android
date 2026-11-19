@@ -41,7 +41,7 @@ adb shell am start -a android.intent.action.SEND -t text/plain --es android.inte
 
 ## Pruebas
 ```powershell
-.\gradlew.bat :app:testDebugUnitTest      # 164 pruebas, ~1 min, sin dispositivo
+.\gradlew.bat :app:testDebugUnitTest      # 176 pruebas, ~1 min, sin dispositivo
 ```
 Genera además capturas de las pantallas reales en `app\build\screenshots\`. Detalle en [docs/TESTING.md](docs/TESTING.md).
 
